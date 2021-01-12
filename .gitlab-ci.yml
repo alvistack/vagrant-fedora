@@ -130,7 +130,7 @@ build:libvirt-33:
       - packer/*/output-vagrant/*.box
   variables:
     _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "10"
+    _PACKER_BUILDER_VERSION: "33"
 
 deploy:libvirt-33:
   <<: *job-vagrant-cloud-provider-upload
@@ -142,7 +142,7 @@ deploy:libvirt-33:
     policy: pull
   variables:
     _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "10"
+    _PACKER_BUILDER_VERSION: "33"
   needs:
     - build:libvirt-33
 
@@ -155,7 +155,7 @@ build:virtualbox-33:
       - packer/*/output-vagrant/*.box
   variables:
     _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "10"
+    _PACKER_BUILDER_VERSION: "33"
 
 deploy:virtualbox-33:
   <<: *job-vagrant-cloud-provider-upload
@@ -167,6 +167,6 @@ deploy:virtualbox-33:
     policy: pull
   variables:
     _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "10"
+    _PACKER_BUILDER_VERSION: "33"
   needs:
     - build:virtualbox-33
