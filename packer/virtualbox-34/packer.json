@@ -1,0 +1,64 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "<tab> ",
+        "text<wait> ",
+        "net.ifnames=0 biosdevname=0<wait> ",
+        "inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<wait> ",
+        "<enter>"
+      ],
+      "boot_wait": "10s",
+      "cpus": 2,
+      "disk_size": 131072,
+      "guest_os_type": "Fedora_64",
+      "headless": true,
+      "http_directory": "./",
+      "iso_checksum": "sha256:f6ac2c1e58f458a379a5975353c8bf49b901834abacafbfed42d70c3d96040ba",
+      "iso_url": "http://dl.fedoraproject.org/pub/fedora/linux/releases/test/34_Beta/Server/x86_64/iso/Fedora-Server-netinst-x86_64-34_Beta-1.3.iso",
+      "memory": 4096,
+      "shutdown_command": "sudo shutdown -h now",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_timeout": "3600s",
+      "ssh_username": "vagrant",
+      "type": "virtualbox-iso",
+      "vrdp_bind_address": "0.0.0.0",
+      "vrdp_port_max": 6000,
+      "vrdp_port_min": 5900
+    }
+  ],
+  "post-processors": [
+    {
+      "inline": [
+        "set -eu",
+        "export _IMAGE=\"$(ls -1d output-virtualbox-iso/packer-virtualbox-iso-*.vmdk)\"",
+        "sudo qemu-img convert -f vmdk -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
+        "sudo rm -rf \"$_IMAGE\"",
+        "sudo chmod a+r /boot/vmlinuz*",
+        "sudo virt-sysprep --operations defaults,-ssh-userdir,-customize -a \"$_IMAGE.convert\"",
+        "sudo virt-sparsify --in-place \"$_IMAGE.convert\"",
+        "sudo qemu-img convert -f qcow2 -O vmdk \"$_IMAGE.convert\" \"$_IMAGE\"",
+        "sudo rm -rf \"$_IMAGE.convert\""
+      ],
+      "type": "shell-local"
+    },
+    {
+      "compression_level": 9,
+      "keep_input_artifact": true,
+      "output": "output-vagrant/package.box",
+      "provider_override": "virtualbox",
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "galaxy_file": "./ansible-galaxy-requirements.yml",
+      "inventory_directory": "./",
+      "playbook_file": "./packer.yml",
+      "type": "ansible",
+      "user": "vagrant"
+    }
+  ]
+}
+
