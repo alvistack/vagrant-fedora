@@ -1,5 +1,7 @@
 # Vagrant Box Packaging for Fedora
 
+<img src="/alvistack.svg" width="75" alt="AlviStack">
+
 [![GitLab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/vagrant-fedora/master)](https://gitlab.com/alvistack/vagrant-fedora/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/vagrant-fedora.svg)](https://github.com/alvistack/vagrant-fedora/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/vagrant-fedora.svg)](https://github.com/alvistack/vagrant-fedora/blob/master/LICENSE)
