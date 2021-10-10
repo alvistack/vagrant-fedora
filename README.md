@@ -5,7 +5,7 @@
 [![GitLab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/vagrant-fedora/master)](https://gitlab.com/alvistack/vagrant-fedora/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/vagrant-fedora.svg)](https://github.com/alvistack/vagrant-fedora/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/vagrant-fedora.svg)](https://github.com/alvistack/vagrant-fedora/blob/master/LICENSE)
-[![Vagrant Box download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Ffedora-33&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Ffedora-33)](https://app.vagrantup.com/alvistack/boxes/fedora-33)
+[![Vagrant Box download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Ffedora-34&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Ffedora-34)](https://app.vagrantup.com/alvistack/boxes/fedora-34)
 
 Fedora is a Linux distribution developed by the community-supported Fedora Project which is sponsored primarily by Red Hat, a subsidiary of IBM, with additional support from other companies. Fedora contains software distributed under various free and open-source licenses and aims to be on the leading edge of free technologies. Fedora is the upstream source of the commercial Red Hat Enterprise Linux distribution, and subsequently CentOS as well.
 
@@ -13,6 +13,12 @@ Learn more about Fedora: <https://getfedora.org/>
 
 ## Supported Boxes and Respective Packer Template Links
 
+  - [`alvistack/fedora-35`](https://app.vagrantup.com/alvistack/boxes/fedora-35)
+      - [`packer/libvirt-35/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/libvirt-35/packer.json)
+      - [`packer/virtualbox-35/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/virtualbox-35/packer.json)
+  - [`alvistack/fedora-34`](https://app.vagrantup.com/alvistack/boxes/fedora-34)
+      - [`packer/libvirt-34/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/libvirt-34/packer.json)
+      - [`packer/virtualbox-34/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/virtualbox-34/packer.json)
   - [`alvistack/fedora-33`](https://app.vagrantup.com/alvistack/boxes/fedora-33)
       - [`packer/libvirt-33/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/libvirt-33/packer.json)
       - [`packer/virtualbox-33/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/virtualbox-33/packer.json)
@@ -34,7 +40,7 @@ Learn more about Fedora: <https://getfedora.org/>
 Once you have [Vagrant](https://www.vagrantup.com/docs/installation) and [VirtaulBox](https://www.virtualbox.org/) installed, run the following commands under your [project directory](https://learn.hashicorp.com/tutorials/vagrant/getting-started-project-setup?in=vagrant/getting-started):
 
     # Initialize Vagrant
-    vagrant init alvistack/fedora-33
+    vagrant init alvistack/fedora-34
     
     # Start the virtual machine
     vagrant up
