@@ -217,31 +217,6 @@ deploy:libvirt-34:
   needs:
     - build:libvirt-34
 
-build:libvirt-33:
-  <<: *job-packer-build
-  stage: build
-  cache:
-    key: "$CI_PIPELINE_ID-libvirt-33"
-    paths:
-      - packer/*/output-vagrant
-  variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "33"
-
-deploy:libvirt-33:
-  <<: *job-vagrant-cloud-provider-upload
-  stage: deploy
-  cache:
-    key: "$CI_PIPELINE_ID-libvirt-33"
-    paths:
-      - packer/*/output-vagrant
-    policy: pull
-  variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "33"
-  needs:
-    - build:libvirt-33
-
 test:virtualbox-35:
   <<: *job-packer-build
   stage: test
@@ -291,28 +266,3 @@ deploy:virtualbox-34:
     _PACKER_BUILDER_VERSION: "34"
   needs:
     - test:virtualbox-34
-
-test:virtualbox-33:
-  <<: *job-packer-build
-  stage: test
-  cache:
-    key: "$CI_PIPELINE_ID-virtualbox-33"
-    paths:
-      - packer/*/output-vagrant
-  variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "33"
-
-deploy:virtualbox-33:
-  <<: *job-vagrant-cloud-provider-upload
-  stage: deploy
-  cache:
-    key: "$CI_PIPELINE_ID-virtualbox-33"
-    paths:
-      - packer/*/output-vagrant
-    policy: pull
-  variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "33"
-  needs:
-    - test:virtualbox-33
