@@ -13,6 +13,9 @@ Learn more about Fedora: <https://getfedora.org/>
 
 ## Supported Boxes and Respective Packer Template Links
 
+  - [`alvistack/fedora-rawhide`](https://app.vagrantup.com/alvistack/boxes/fedora-rawhide)
+      - [`packer/libvirt-rawhide/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/libvirt-rawhide/packer.json)
+      - [`packer/virtualbox-rawhide/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/virtualbox-rawhide/packer.json)
   - [`alvistack/fedora-35`](https://app.vagrantup.com/alvistack/boxes/fedora-35)
       - [`packer/libvirt-35/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/libvirt-35/packer.json)
       - [`packer/virtualbox-35/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/virtualbox-35/packer.json)
