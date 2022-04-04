@@ -34,8 +34,8 @@
       "guest_os_type": "Fedora_64",
       "headless": true,
       "http_directory": "./",
-      "iso_checksum": "3fe521d6c7b12c167f3ac4adab14c1f344dd72136ba577aa2bcc4a67bcce2bc6",
-      "iso_url": "http://dl.fedoraproject.org/pub/fedora/linux/releases/35/Server/x86_64/iso/Fedora-Server-dvd-x86_64-35-1.2.iso",
+      "iso_checksum": "1dc2157b22a672d397ea856f3f93ea70968fe07acbc1f12f2331a3ef394eec43",
+      "iso_url": "http://dl.fedoraproject.org/pub/fedora/linux/releases/test/36_Beta/Server/x86_64/iso/Fedora-Server-dvd-x86_64-36_Beta-1.4.iso",
       "memory": 16384,
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",
@@ -83,4 +83,3 @@
     }
   ]
 }
-

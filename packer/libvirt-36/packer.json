@@ -26,7 +26,6 @@
         "vmlinuz initrd=initrd.img inst.stage2=cdrom quite text <wait5>",
         "net.ifnames=0 biosdevname=0 systemd.unified_cgroup_hierarchy=0 <wait5>",
         "inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg <wait5>",
-        "inst.updates=https://rvykydal.fedorapeople.org/update-images/updates.f35-2019579-resolvconf.img <wait5>",
         "<enter>"
       ],
       "boot_wait": "1s",

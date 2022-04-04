@@ -1,7 +1,6 @@
 {
   "builders": [
     {
-      "accelerator": "kvm",
       "boot_command": [
         "<tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><wait>",
         "<tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><wait>",
@@ -26,48 +25,41 @@
         "vmlinuz initrd=initrd.img inst.stage2=cdrom quite text <wait5>",
         "net.ifnames=0 biosdevname=0 systemd.unified_cgroup_hierarchy=0 <wait5>",
         "inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg <wait5>",
-        "inst.updates=https://rvykydal.fedorapeople.org/update-images/updates.f35-2019579-resolvconf.img <wait5>",
         "<enter>"
       ],
       "boot_wait": "1s",
       "cpus": 2,
-      "disk_cache": "writeback",
-      "disk_compression": true,
-      "disk_image": false,
-      "disk_interface": "virtio",
-      "disk_size": "131072M",
-      "format": "qcow2",
+      "disk_size": 131072,
+      "guest_os_type": "Fedora_64",
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "1dc2157b22a672d397ea856f3f93ea70968fe07acbc1f12f2331a3ef394eec43",
       "iso_url": "http://dl.fedoraproject.org/pub/fedora/linux/releases/test/36_Beta/Server/x86_64/iso/Fedora-Server-dvd-x86_64-36_Beta-1.4.iso",
       "memory": 16384,
-      "net_device": "virtio-net",
-      "qemu_binary": "kvm",
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",
       "ssh_port": 22,
       "ssh_read_write_timeout": "600s",
       "ssh_timeout": "120m",
       "ssh_username": "vagrant",
-      "type": "qemu",
-      "vnc_bind_address": "0.0.0.0",
-      "vnc_port_max": 6000,
-      "vnc_port_min": 5900
+      "type": "virtualbox-iso",
+      "vrdp_bind_address": "0.0.0.0",
+      "vrdp_port_max": 6000,
+      "vrdp_port_min": 5900
     }
   ],
   "post-processors": [
     {
       "inline": [
         "set -eu",
-        "export _IMAGE=\"output-qemu/packer-qemu\"",
-        "sudo qemu-img convert -f qcow2 -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
+        "export _IMAGE=\"$(ls -1d output-virtualbox-iso/packer-virtualbox-iso-*.vmdk)\"",
+        "sudo qemu-img convert -f vmdk -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
         "sudo rm -rf \"$_IMAGE\"",
         "sudo chmod a+r /boot/vmlinuz*",
         "sudo virt-customize -a \"$_IMAGE.convert\" --delete \"/var/lib/systemd/random-seed\" --firstboot-command \"/usr/local/bin/virt-sysprep-firstboot.sh\"",
         "sudo virt-sysprep --operations defaults,-ssh-userdir,-customize -a \"$_IMAGE.convert\"",
         "sudo virt-sparsify --in-place \"$_IMAGE.convert\"",
-        "sudo qemu-img convert -f qcow2 -O qcow2 -c \"$_IMAGE.convert\" \"$_IMAGE\"",
+        "sudo qemu-img convert -f qcow2 -O vmdk \"$_IMAGE.convert\" \"$_IMAGE\"",
         "sudo rm -rf \"$_IMAGE.convert\""
       ],
       "type": "shell-local"
@@ -76,7 +68,7 @@
       "compression_level": 9,
       "keep_input_artifact": true,
       "output": "output-vagrant/package.box",
-      "provider_override": "libvirt",
+      "provider_override": "virtualbox",
       "type": "vagrant"
     }
   ],
