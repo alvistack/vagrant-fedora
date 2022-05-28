@@ -14,14 +14,14 @@ Learn more about Fedora: <https://getfedora.org/>
 ## Supported Boxes and Respective Packer Template Links
 
   - [`alvistack/fedora-rawhide`](https://app.vagrantup.com/alvistack/boxes/fedora-rawhide)
-      - [`packer/libvirt-rawhide/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/libvirt-rawhide/packer.json)
-      - [`packer/virtualbox-rawhide/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/virtualbox-rawhide/packer.json)
+      - [`packer/fedora-rawhide-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-rawhide-libvirt/packer.json)
+      - [`packer/fedora-rawhide-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-rawhide-virtualbox/packer.json)
   - [`alvistack/fedora-36`](https://app.vagrantup.com/alvistack/boxes/fedora-36)
-      - [`packer/libvirt-36/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/libvirt-36/packer.json)
-      - [`packer/virtualbox-36/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/virtualbox-36/packer.json)
+      - [`packer/fedora-36-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-36-libvirt/packer.json)
+      - [`packer/fedora-36-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-36-virtualbox/packer.json)
   - [`alvistack/fedora-35`](https://app.vagrantup.com/alvistack/boxes/fedora-35)
-      - [`packer/libvirt-35/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/libvirt-35/packer.json)
-      - [`packer/virtualbox-35/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/virtualbox-35/packer.json)
+      - [`packer/fedora-35-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-35-libvirt/packer.json)
+      - [`packer/fedora-35-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-35-virtualbox/packer.json)
 
 ## Overview
 
@@ -56,7 +56,7 @@ Once you have [Vagrant](https://www.vagrantup.com/docs/installation) and [Virtau
 You could also run our [Molecule](https://molecule.readthedocs.io/en/stable/) test cases if you have [Vagrant](https://www.vagrantup.com/) and [Libvirt](https://libvirt.org/) installed, e.g.
 
     # Run Molecule on Fedora 36
-    molecule converge -s libvirt-36
+    molecule converge -s fedora-36-libvirt
 
 Please refer to [.gitlab-ci.yml](.gitlab-ci.yml) for more information on running Molecule.
 
