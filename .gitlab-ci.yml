@@ -104,25 +104,22 @@
 .script-packer-build: &script-packer-build
   - |
     sudo -E vagrant cloud auth login --token $VAGRANT_CLOUD_TOKEN
-    cd $CI_PROJECT_DIR/packer/$_PACKER_BUILDER_PROVIDER-$_PACKER_BUILDER_VERSION
+    cd $CI_PROJECT_DIR/packer/$_BOX-$_PROVIDER
     sudo -E packer build packer.json
 
 .script-vagrant-box-add: &script-vagrant-box-add
   - |
     export _ORG="$CI_PROJECT_NAMESPACE"
-    export _BOX="$(echo $CI_PROJECT_NAME | sed "s/^vagrant-//g")-$_PACKER_BUILDER_VERSION"
-    export _PROVIDER="$_PACKER_BUILDER_PROVIDER"
     sudo -E umount /home/vagrant/.vagrant.d/boxes
     sudo -E vagrant box add \
       --name $_ORG/$_BOX \
       --provider $_PROVIDER \
-      $CI_PROJECT_DIR/packer/$_PACKER_BUILDER_PROVIDER-$_PACKER_BUILDER_VERSION/output-vagrant/package.box
+      $CI_PROJECT_DIR/packer/$_BOX-$_PROVIDER/output-vagrant/package.box
 
 .script-molecule-test: &script-molecule-test
   - |
-    export VAGRANT_EXPERIMENTAL="1"
     export _MOLECULE_INSTANCE_NAME="$(pwgen -1AB 12)"
-    sudo -E molecule test -s $_PACKER_BUILDER_PROVIDER-$_PACKER_BUILDER_VERSION
+    sudo -E molecule test -s $_BOX-$_PROVIDER
 
 .script-vagrant-cloud-provider-upload: &script-vagrant-cloud-provider-upload
   - |
@@ -134,10 +131,8 @@
       exit 0
     fi
     sudo -E vagrant cloud auth login --token $VAGRANT_CLOUD_TOKEN
-    cd $CI_PROJECT_DIR/packer/$_PACKER_BUILDER_PROVIDER-$_PACKER_BUILDER_VERSION
+    cd $CI_PROJECT_DIR/packer/$_BOX-$_PROVIDER
     export _ORG="$CI_PROJECT_NAMESPACE"
-    export _BOX="$(echo $CI_PROJECT_NAME | sed "s/^vagrant-//g")-$_PACKER_BUILDER_VERSION"
-    export _PROVIDER="$_PACKER_BUILDER_PROVIDER"
     export _CHECKSUM="$(sha256sum output-vagrant/package.box | awk '{ print $1 }')"
     curl -skL \
       --header "Content-Type: application/json" \
@@ -183,7 +178,7 @@
     - *script-linters
     - *script-packer-build
 
-.job-molecule: &job-molecule
+.job-molecule-test: &job-molecule-test
   script:
     - *script-bootstrap-python
     - *script-bootstrap-ansible
@@ -200,240 +195,240 @@
     - *script-vagrant-cloud-provider-upload
 
 default:
-  retry: 2
   before_script:
     - *script-git-submodule
+  retry: 2
 
-build:libvirt-rawhide:
+build:fedora-rawhide-libvirt:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-rawhide"
+    key: "$CI_PIPELINE_ID-fedora-rawhide-libvirt"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "rawhide"
+    _BOX: "fedora-rawhide"
+    _PROVIDER: "libvirt"
 
-test:libvirt-rawhide:
-  <<: *job-molecule
+test:fedora-rawhide-libvirt:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-rawhide"
+    key: "$CI_PIPELINE_ID-fedora-rawhide-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "rawhide"
+    _BOX: "fedora-rawhide"
+    _PROVIDER: "libvirt"
   needs:
-    - build:libvirt-rawhide
+    - build:fedora-rawhide-libvirt
 
-deploy:libvirt-rawhide:
+deploy:fedora-rawhide-libvirt:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-rawhide"
+    key: "$CI_PIPELINE_ID-fedora-rawhide-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "rawhide"
+    _BOX: "fedora-rawhide"
+    _PROVIDER: "libvirt"
   needs:
-    - test:libvirt-rawhide
+    - test:fedora-rawhide-libvirt
 
-build:libvirt-36:
+build:fedora-rawhide-virtualbox:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-36"
+    key: "$CI_PIPELINE_ID-fedora-rawhide-virtualbox"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "36"
+    _BOX: "fedora-rawhide"
+    _PROVIDER: "virtualbox"
 
-test:libvirt-36:
-  <<: *job-molecule
+test:fedora-rawhide-virtualbox:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-36"
+    key: "$CI_PIPELINE_ID-fedora-rawhide-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "36"
+    _BOX: "fedora-rawhide"
+    _PROVIDER: "virtualbox"
   needs:
-    - build:libvirt-36
+    - build:fedora-rawhide-virtualbox
 
-deploy:libvirt-36:
+deploy:fedora-rawhide-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-36"
+    key: "$CI_PIPELINE_ID-fedora-rawhide-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "36"
+    _BOX: "fedora-rawhide"
+    _PROVIDER: "virtualbox"
   needs:
-    - test:libvirt-36
+    - test:fedora-rawhide-virtualbox
 
-build:libvirt-35:
+build:fedora-36-libvirt:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-35"
+    key: "$CI_PIPELINE_ID-fedora-36-libvirt"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "35"
+    _BOX: "fedora-36"
+    _PROVIDER: "libvirt"
 
-test:libvirt-35:
-  <<: *job-molecule
+test:fedora-36-libvirt:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-35"
+    key: "$CI_PIPELINE_ID-fedora-36-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "35"
+    _BOX: "fedora-36"
+    _PROVIDER: "libvirt"
   needs:
-    - build:libvirt-35
+    - build:fedora-36-libvirt
 
-deploy:libvirt-35:
+deploy:fedora-36-libvirt:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-35"
+    key: "$CI_PIPELINE_ID-fedora-36-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "35"
+    _BOX: "fedora-36"
+    _PROVIDER: "libvirt"
   needs:
-    - test:libvirt-35
+    - test:fedora-36-libvirt
 
-build:virtualbox-rawhide:
+build:fedora-36-virtualbox:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-rawhide"
+    key: "$CI_PIPELINE_ID-fedora-36-virtualbox"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "rawhide"
+    _BOX: "fedora-36"
+    _PROVIDER: "virtualbox"
 
-test:virtualbox-rawhide:
-  <<: *job-molecule
+test:fedora-36-virtualbox:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-rawhide"
+    key: "$CI_PIPELINE_ID-fedora-36-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "rawhide"
+    _BOX: "fedora-36"
+    _PROVIDER: "virtualbox"
   needs:
-    - build:virtualbox-rawhide
+    - build:fedora-36-virtualbox
 
-deploy:virtualbox-rawhide:
+deploy:fedora-36-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-rawhide"
+    key: "$CI_PIPELINE_ID-fedora-36-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "rawhide"
+    _BOX: "fedora-36"
+    _PROVIDER: "virtualbox"
   needs:
-    - test:virtualbox-rawhide
+    - test:fedora-36-virtualbox
 
-build:virtualbox-36:
+build:fedora-35-libvirt:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-36"
+    key: "$CI_PIPELINE_ID-fedora-35-libvirt"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "36"
+    _BOX: "fedora-35"
+    _PROVIDER: "libvirt"
 
-test:virtualbox-36:
-  <<: *job-molecule
+test:fedora-35-libvirt:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-36"
+    key: "$CI_PIPELINE_ID-fedora-35-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "36"
+    _BOX: "fedora-35"
+    _PROVIDER: "libvirt"
   needs:
-    - build:virtualbox-36
+    - build:fedora-35-libvirt
 
-deploy:virtualbox-36:
+deploy:fedora-35-libvirt:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-36"
+    key: "$CI_PIPELINE_ID-fedora-35-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "36"
+    _BOX: "fedora-35"
+    _PROVIDER: "libvirt"
   needs:
-    - test:virtualbox-36
+    - test:fedora-35-libvirt
 
-build:virtualbox-35:
+build:fedora-35-virtualbox:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-35"
+    key: "$CI_PIPELINE_ID-fedora-35-virtualbox"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "35"
+    _BOX: "fedora-35"
+    _PROVIDER: "virtualbox"
 
-test:virtualbox-35:
-  <<: *job-molecule
+test:fedora-35-virtualbox:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-35"
+    key: "$CI_PIPELINE_ID-fedora-35-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "35"
+    _BOX: "fedora-35"
+    _PROVIDER: "virtualbox"
   needs:
-    - build:virtualbox-35
+    - build:fedora-35-virtualbox
 
-deploy:virtualbox-35:
+deploy:fedora-35-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-35"
+    key: "$CI_PIPELINE_ID-fedora-35-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "35"
+    _BOX: "fedora-35"
+    _PROVIDER: "virtualbox"
   needs:
-    - test:virtualbox-35
+    - test:fedora-35-virtualbox
