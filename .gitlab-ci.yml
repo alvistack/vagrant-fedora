@@ -248,6 +248,8 @@ build:fedora-rawhide-virtualbox:
   variables:
     _BOX: "fedora-rawhide"
     _PROVIDER: "virtualbox"
+  allow_failure: true
+  retry: 0
 
 test:fedora-rawhide-virtualbox:
   <<: *job-molecule-test
@@ -262,6 +264,8 @@ test:fedora-rawhide-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - build:fedora-rawhide-virtualbox
+  allow_failure: true
+  retry: 0
 
 deploy:fedora-rawhide-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
@@ -276,6 +280,8 @@ deploy:fedora-rawhide-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - test:fedora-rawhide-virtualbox
+  allow_failure: true
+  retry: 0
 
 build:fedora-36-libvirt:
   <<: *job-packer-build
@@ -326,6 +332,8 @@ build:fedora-36-virtualbox:
   variables:
     _BOX: "fedora-36"
     _PROVIDER: "virtualbox"
+  allow_failure: true
+  retry: 0
 
 test:fedora-36-virtualbox:
   <<: *job-molecule-test
@@ -340,6 +348,8 @@ test:fedora-36-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - build:fedora-36-virtualbox
+  allow_failure: true
+  retry: 0
 
 deploy:fedora-36-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
@@ -354,6 +364,8 @@ deploy:fedora-36-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - test:fedora-36-virtualbox
+  allow_failure: true
+  retry: 0
 
 build:fedora-35-libvirt:
   <<: *job-packer-build
@@ -404,6 +416,8 @@ build:fedora-35-virtualbox:
   variables:
     _BOX: "fedora-35"
     _PROVIDER: "virtualbox"
+  allow_failure: true
+  retry: 0
 
 test:fedora-35-virtualbox:
   <<: *job-molecule-test
@@ -418,6 +432,8 @@ test:fedora-35-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - build:fedora-35-virtualbox
+  allow_failure: true
+  retry: 0
 
 deploy:fedora-35-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
@@ -432,3 +448,5 @@ deploy:fedora-35-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - test:fedora-35-virtualbox
+  allow_failure: true
+  retry: 0
