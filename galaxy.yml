@@ -15,7 +15,7 @@
 # limitations under the License.
 
 namespace: alvistack
-name: vagrant-fedora
+name: fedora
 description: Vagrant Box Packaging for Fedora
 
 version: 0.0.0
