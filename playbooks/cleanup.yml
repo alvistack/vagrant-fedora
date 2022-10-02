@@ -71,10 +71,10 @@
     - name: redhat | subscription-manager unregister
       ansible.builtin.raw:
         cmd: |
-        set -eu
-        subscription-manager remove --all
-        subscription-manager unregister
-        subscription-manager clean
+          set -eu
+          subscription-manager remove --all
+          subscription-manager unregister
+          subscription-manager clean
       args:
         executable: "/bin/bash"
       changed_when: false
