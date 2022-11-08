@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+-   Remove Fedora 35 support
+
 ## 20221014.1.1 - 2022-10-14
 
 ### Major Changes
