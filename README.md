@@ -13,30 +13,30 @@ Learn more about Fedora: <https://getfedora.org/>
 
 ## Supported Boxes and Respective Packer Template Links
 
-  - [`alvistack/fedora-rawhide`](https://app.vagrantup.com/alvistack/boxes/fedora-rawhide)
-      - [`packer/fedora-rawhide-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-rawhide-libvirt/packer.json)
-      - [`packer/fedora-rawhide-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-rawhide-virtualbox/packer.json)
-  - [`alvistack/fedora-37`](https://app.vagrantup.com/alvistack/boxes/fedora-37)
-      - [`packer/fedora-37-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-37-libvirt/packer.json)
-      - [`packer/fedora-37-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-37-virtualbox/packer.json)
-  - [`alvistack/fedora-36`](https://app.vagrantup.com/alvistack/boxes/fedora-36)
-      - [`packer/fedora-36-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-36-libvirt/packer.json)
-      - [`packer/fedora-36-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-36-virtualbox/packer.json)
-  - [`alvistack/fedora-35`](https://app.vagrantup.com/alvistack/boxes/fedora-35)
-      - [`packer/fedora-35-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-35-libvirt/packer.json)
-      - [`packer/fedora-35-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-35-virtualbox/packer.json)
+-   [`alvistack/fedora-rawhide`](https://app.vagrantup.com/alvistack/boxes/fedora-rawhide)
+    -   [`packer/fedora-rawhide-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-rawhide-libvirt/packer.json)
+    -   [`packer/fedora-rawhide-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-rawhide-virtualbox/packer.json)
+-   [`alvistack/fedora-37`](https://app.vagrantup.com/alvistack/boxes/fedora-37)
+    -   [`packer/fedora-37-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-37-libvirt/packer.json)
+    -   [`packer/fedora-37-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-37-virtualbox/packer.json)
+-   [`alvistack/fedora-36`](https://app.vagrantup.com/alvistack/boxes/fedora-36)
+    -   [`packer/fedora-36-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-36-libvirt/packer.json)
+    -   [`packer/fedora-36-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-36-virtualbox/packer.json)
+-   [`alvistack/fedora-35`](https://app.vagrantup.com/alvistack/boxes/fedora-35)
+    -   [`packer/fedora-35-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-35-libvirt/packer.json)
+    -   [`packer/fedora-35-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-35-virtualbox/packer.json)
 
 ## Overview
 
-  - Packaging with [Packer](https://www.packer.io/)
-  - Minimal [Vagrant base box implementation](https://www.vagrantup.com/docs/boxes/base)
-  - Support [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)
-  - Support [VirtualBox Guest Additions](https://www.virtualbox.org/manual/ch04.html)
-  - Support [Vagrant synced folder with rsync](https://www.vagrantup.com/docs/synced-folders/rsync)
-  - Support [Vagrant provisioner with Ansible](https://www.vagrantup.com/docs/provisioning/ansible)
-  - Standardize disk partition with GPT
-  - Standardize file system mount with UUID
-  - Standardize network interface with `eth0`
+-   Packaging with [Packer](https://www.packer.io/)
+-   Minimal [Vagrant base box implementation](https://www.vagrantup.com/docs/boxes/base)
+-   Support [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)
+-   Support [VirtualBox Guest Additions](https://www.virtualbox.org/manual/ch04.html)
+-   Support [Vagrant synced folder with rsync](https://www.vagrantup.com/docs/synced-folders/rsync)
+-   Support [Vagrant provisioner with Ansible](https://www.vagrantup.com/docs/provisioning/ansible)
+-   Standardize disk partition with GPT
+-   Standardize file system mount with UUID
+-   Standardize network interface with `eth0`
 
 ### Quick Start
 
@@ -44,13 +44,13 @@ Once you have [Vagrant](https://www.vagrantup.com/docs/installation) and [Virtau
 
     # Initialize Vagrant
     vagrant init alvistack/fedora-36
-    
+
     # Start the virtual machine
     vagrant up
-    
+
     # SSH into this machine
     vagrant ssh
-    
+
     # Terminate the virtual machine
     vagrant destroy --force
 
@@ -75,11 +75,11 @@ Version tags ended with `.0.0` are rolling release rebuild by [GitLab pipeline](
 
 ## License
 
-  - Code released under [Apache License 2.0](LICENSE)
-  - Docs released under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
+-   Code released under [Apache License 2.0](LICENSE)
+-   Docs released under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
 
 ## Author Information
 
-  - Wong Hoi Sing Edison
-      - <https://twitter.com/hswong3i>
-      - <https://github.com/hswong3i>
+-   Wong Hoi Sing Edison
+    -   <https://twitter.com/hswong3i>
+    -   <https://github.com/hswong3i>
