@@ -5,7 +5,7 @@
 [![GitLab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/vagrant-fedora/master)](https://gitlab.com/alvistack/vagrant-fedora/-/pipelines)
 [![GitHub tag](https://img.shields.io/github/tag/alvistack/vagrant-fedora.svg)](https://github.com/alvistack/vagrant-fedora/tags)
 [![GitHub license](https://img.shields.io/github/license/alvistack/vagrant-fedora.svg)](https://github.com/alvistack/vagrant-fedora/blob/master/LICENSE)
-[![Vagrant Box download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Ffedora-36&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Ffedora-36)](https://app.vagrantup.com/alvistack/boxes/fedora-36)
+[![Vagrant Box download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Ffedora-37&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Ffedora-37)](https://app.vagrantup.com/alvistack/boxes/fedora-37)
 
 Fedora is a Linux distribution developed by the community-supported Fedora Project which is sponsored primarily by Red Hat, a subsidiary of IBM, with additional support from other companies. Fedora contains software distributed under various free and open-source licenses and aims to be on the leading edge of free technologies. Fedora is the upstream source of the commercial Red Hat Enterprise Linux distribution, and subsequently CentOS as well.
 
@@ -22,9 +22,6 @@ Learn more about Fedora: <https://getfedora.org/>
 -   [`alvistack/fedora-36`](https://app.vagrantup.com/alvistack/boxes/fedora-36)
     -   [`packer/fedora-36-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-36-libvirt/packer.json)
     -   [`packer/fedora-36-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-36-virtualbox/packer.json)
--   [`alvistack/fedora-35`](https://app.vagrantup.com/alvistack/boxes/fedora-35)
-    -   [`packer/fedora-35-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-35-libvirt/packer.json)
-    -   [`packer/fedora-35-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-35-virtualbox/packer.json)
 
 ## Overview
 
