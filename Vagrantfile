@@ -1,6 +1,6 @@
 Vagrant.configure('2') do |config|
-  config.vm.hostname = 'fedora-37'
-  config.vm.box = 'alvistack/fedora-37'
+  config.vm.hostname = 'fedora-38'
+  config.vm.box = 'alvistack/fedora-38'
 
   config.vm.provider :libvirt do |libvirt|
     libvirt.cpu_mode = 'host-passthrough'
