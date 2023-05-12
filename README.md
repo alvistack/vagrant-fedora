@@ -22,9 +22,6 @@ Learn more about Fedora: <https://getfedora.org/>
 -   [`alvistack/fedora-37`](https://app.vagrantup.com/alvistack/boxes/fedora-37)
     -   [`packer/fedora-37-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-37-libvirt/packer.json)
     -   [`packer/fedora-37-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-37-virtualbox/packer.json)
--   [`alvistack/fedora-36`](https://app.vagrantup.com/alvistack/boxes/fedora-36)
-    -   [`packer/fedora-36-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-36-libvirt/packer.json)
-    -   [`packer/fedora-36-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-36-virtualbox/packer.json)
 
 ## Overview
 
