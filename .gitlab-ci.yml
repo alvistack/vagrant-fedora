@@ -248,7 +248,6 @@ build:fedora-rawhide-virtualbox:
   variables:
     _BOX: "fedora-rawhide"
     _PROVIDER: "virtualbox"
-  allow_failure: true
   retry: 0
 
 test:fedora-rawhide-virtualbox:
@@ -328,7 +327,6 @@ build:fedora-38-virtualbox:
   variables:
     _BOX: "fedora-38"
     _PROVIDER: "virtualbox"
-  allow_failure: true
   retry: 0
 
 test:fedora-38-virtualbox:
@@ -408,7 +406,6 @@ build:fedora-37-virtualbox:
   variables:
     _BOX: "fedora-37"
     _PROVIDER: "virtualbox"
-  allow_failure: true
   retry: 0
 
 test:fedora-37-virtualbox:
