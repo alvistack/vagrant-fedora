@@ -249,7 +249,7 @@ build:fedora-rawhide-virtualbox:
     _BOX: "fedora-rawhide"
     _PROVIDER: "virtualbox"
   needs:
-    - deploy:fedora-rawhide-libvirt
+    - build:fedora-rawhide-libvirt
 
 test:fedora-rawhide-virtualbox:
   <<: *job-molecule-test
@@ -329,7 +329,7 @@ build:fedora-38-virtualbox:
     _BOX: "fedora-38"
     _PROVIDER: "virtualbox"
   needs:
-    - deploy:fedora-38-libvirt
+    - build:fedora-38-libvirt
 
 test:fedora-38-virtualbox:
   <<: *job-molecule-test
@@ -409,7 +409,7 @@ build:fedora-37-virtualbox:
     _BOX: "fedora-37"
     _PROVIDER: "virtualbox"
   needs:
-    - deploy:fedora-37-libvirt
+    - build:fedora-37-libvirt
 
 test:fedora-37-virtualbox:
   <<: *job-molecule-test
