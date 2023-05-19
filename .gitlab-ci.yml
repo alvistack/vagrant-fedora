@@ -248,7 +248,8 @@ build:fedora-rawhide-virtualbox:
   variables:
     _BOX: "fedora-rawhide"
     _PROVIDER: "virtualbox"
-  retry: 0
+  needs:
+    - build:fedora-rawhide-libvirt
 
 test:fedora-rawhide-virtualbox:
   <<: *job-molecule-test
@@ -327,7 +328,8 @@ build:fedora-38-virtualbox:
   variables:
     _BOX: "fedora-38"
     _PROVIDER: "virtualbox"
-  retry: 0
+  needs:
+    - build:fedora-38-libvirt
 
 test:fedora-38-virtualbox:
   <<: *job-molecule-test
@@ -406,7 +408,8 @@ build:fedora-37-virtualbox:
   variables:
     _BOX: "fedora-37"
     _PROVIDER: "virtualbox"
-  retry: 0
+  needs:
+    - build:fedora-37-libvirt
 
 test:fedora-37-virtualbox:
   <<: *job-molecule-test
