@@ -29,7 +29,7 @@
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "66b52d7cb39386644cd740930b0bef0a5a2f2be569328fef6b1f9b3679fdc54d",
-      "iso_url": "https://dl.fedoraproject.org/pub/fedora/linux/releases/38/Server/x86_64/iso/Fedora-Server-dvd-x86_64-38-1.6.iso",
+      "iso_url": "http://dl.fedoraproject.org/pub/fedora/linux/releases/38/Server/x86_64/iso/Fedora-Server-dvd-x86_64-38-1.6.iso",
       "memory": 16384,
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",
