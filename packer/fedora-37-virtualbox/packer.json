@@ -29,7 +29,7 @@
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "0a4de5157af47b41a07a53726cd62ffabd04d5c1a4afece5ee7c7a84c1213e4f",
-      "iso_url": "https://dl.fedoraproject.org/pub/fedora/linux/releases/37/Server/x86_64/iso/Fedora-Server-dvd-x86_64-37-1.7.iso",
+      "iso_url": "http://dl.fedoraproject.org/pub/fedora/linux/releases/37/Server/x86_64/iso/Fedora-Server-dvd-x86_64-37-1.7.iso",
       "memory": 16384,
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",

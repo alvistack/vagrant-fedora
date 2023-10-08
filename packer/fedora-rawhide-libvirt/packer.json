@@ -34,7 +34,7 @@
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "35de29c04ada9379679f2eec9ec7b73ecab5e1070e2e97fc09f4f81ea102d569",
-      "iso_url": "https://dl.fedoraproject.org/pub/fedora/linux/releases/test/39_Beta/Server/x86_64/iso/Fedora-Server-dvd-x86_64-39_Beta-1.1.iso",
+      "iso_url": "http://dl.fedoraproject.org/pub/fedora/linux/releases/test/39_Beta/Server/x86_64/iso/Fedora-Server-dvd-x86_64-39_Beta-1.1.iso",
       "memory": 16384,
       "net_device": "virtio-net",
       "qemu_binary": "kvm",
