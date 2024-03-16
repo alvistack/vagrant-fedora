@@ -25,6 +25,9 @@
       "boot_wait": "1s",
       "cpus": 2,
       "disk_size": 131072,
+      "guest_additions_mode": "attach",
+      "guest_additions_sha256": "1ee0a0dc78a8ec611ea3b236fc76e2e0b19aed62dd932c1cd8f744a8b7291bcc",
+      "guest_additions_url": "http://www.virtualbox.org/download/testcase/VBoxGuestAdditions_7.0.15-162082.iso",
       "guest_os_type": "Fedora_64",
       "headless": true,
       "http_directory": "./",
@@ -93,7 +96,11 @@
         "sudo dnf makecache",
         "sudo dnf install -y dnf dnf5 yum",
         "sudo dnf update -y",
-        "sudo dnf install -y ca-certificates curl gcc glibc-common glibc-langpack-en hostname iproute python3 python3-libdnf5 sudo yum-utils"
+        "sudo dnf install -y ca-certificates curl gcc glibc-common glibc-langpack-en hostname iproute python3 python3-libdnf5 sudo yum-utils",
+        "sudo dnf install -y bzip2 dkms kernel-devel",
+        "sudo mount /dev/sr1 /mnt",
+        "(echo 'y' | sudo sh /mnt/VBoxLinuxAdditions.run) || echo $?",
+        "sudo umount /mnt"
       ],
       "type": "shell"
     },
