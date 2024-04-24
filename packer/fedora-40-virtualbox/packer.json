@@ -1,7 +1,6 @@
 {
   "builders": [
     {
-      "accelerator": "kvm",
       "boot_command": [
         "<tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><wait>",
         "<tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><wait>",
@@ -25,49 +24,52 @@
       ],
       "boot_wait": "1s",
       "cpus": 2,
-      "disk_cache": "writeback",
-      "disk_compression": true,
-      "disk_image": false,
-      "disk_interface": "virtio",
-      "disk_size": "131072M",
-      "format": "qcow2",
+      "disk_size": 131072,
+      "guest_additions_mode": "upload",
+      "guest_os_type": "Fedora_64",
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "32d9ab1798fc8106a0b06e873bdcd83a3efea8412c9401dfe4097347ed0cfc65",
       "iso_url": "http://dl.fedoraproject.org/pub/fedora/linux/releases/40/Server/x86_64/iso/Fedora-Server-dvd-x86_64-40-1.14.iso",
       "memory": 16384,
-      "net_device": "virtio-net",
-      "qemu_binary": "kvm",
-      "qemuargs": [
-        [
-          "-cpu",
-          "host"
-        ]
-      ],
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",
       "ssh_port": 22,
       "ssh_read_write_timeout": "600s",
       "ssh_timeout": "120m",
       "ssh_username": "vagrant",
-      "type": "qemu",
-      "vnc_bind_address": "0.0.0.0",
-      "vnc_port_max": 6000,
-      "vnc_port_min": 5900
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpu-profile",
+          "host"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--nat-localhostreachable1",
+          "on"
+        ]
+      ],
+      "vrdp_bind_address": "0.0.0.0",
+      "vrdp_port_max": 6000,
+      "vrdp_port_min": 5900
     }
   ],
   "post-processors": [
     {
       "inline": [
         "set -eu",
-        "export _IMAGE=\"output-qemu/packer-qemu\"",
-        "sudo qemu-img convert -f qcow2 -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
+        "export _IMAGE=\"$(ls -1d output-virtualbox-iso/packer-virtualbox-iso-*.vmdk)\"",
+        "sudo qemu-img convert -f vmdk -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
         "sudo rm -rf \"$_IMAGE\"",
         "sudo chmod a+r /boot/vmlinuz*",
         "sudo virt-customize --no-network -a \"$_IMAGE.convert\" --delete \"/var/lib/*/random-seed\" --delete \"/var/lib/wicked/*\" --firstboot-command \"/usr/local/bin/virt-sysprep-firstboot.sh\"",
         "sudo virt-sysprep --operations defaults,-ssh-userdir,-customize -a \"$_IMAGE.convert\"",
         "sudo virt-sparsify --in-place \"$_IMAGE.convert\"",
-        "sudo qemu-img convert -f qcow2 -O qcow2 -c \"$_IMAGE.convert\" \"$_IMAGE\"",
+        "sudo qemu-img convert -f qcow2 -O vmdk \"$_IMAGE.convert\" \"$_IMAGE\"",
         "sudo rm -rf \"$_IMAGE.convert\""
       ],
       "type": "shell-local"
@@ -76,7 +78,7 @@
       "compression_level": 9,
       "keep_input_artifact": true,
       "output": "output-vagrant/package.box",
-      "provider_override": "libvirt",
+      "provider_override": "virtualbox",
       "type": "vagrant"
     }
   ],
@@ -85,15 +87,12 @@
       "inline": [
         "set -eu",
         "sudo dnf makecache",
-        "sudo dnf install -y wget",
-        "sudo wget https://download.opensuse.org/repositories/home:alvistack/Fedora_Rawhide/home:alvistack.repo -O /etc/yum.repos.d/home:alvistack.repo",
-        "sudo dnf makecache",
-        "sudo dnf install -y --allowerasing python3-requests",
-        "sudo dnf makecache",
-        "sudo dnf install -y dnf dnf5 yum",
         "sudo dnf update -y",
         "sudo dnf install -y ca-certificates curl gcc glibc-common glibc-langpack-en hostname iproute python3 python3-libdnf5 sudo yum-utils",
-        "sudo dnf install -y qemu-guest-agent"
+        "sudo dnf install -y bzip2 dkms kernel-devel",
+        "sudo mount -o loop VBoxGuestAdditions.iso /mnt",
+        "(echo 'y' | sudo sh /mnt/VBoxLinuxAdditions.run) || echo $?",
+        "sudo umount /mnt"
       ],
       "type": "shell"
     },
