@@ -17,7 +17,7 @@
         "set gfxpayload=keep<enter><wait5>",
         "linux /images/pxeboot/vmlinuz <wait5>",
         "inst.stage2=cdrom quite text <wait5>",
-        "net.ifnames=0 biosdevname=0 systemd.unified_cgroup_hierarchy=0 <wait5>",
+        "net.ifnames=0 biosdevname=0 systemd.unified_cgroup_hierarchy=1 <wait5>",
         "inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg <wait5>",
         "---<enter><wait5>",
         "initrd /images/pxeboot/initrd.img<enter><wait5>",
