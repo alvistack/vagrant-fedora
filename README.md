@@ -9,7 +9,7 @@ tag](https://img.shields.io/github/tag/alvistack/vagrant-fedora.svg)](https://gi
 [![GitHub
 license](https://img.shields.io/github/license/alvistack/vagrant-fedora.svg)](https://github.com/alvistack/vagrant-fedora/blob/master/LICENSE)
 [![Vagrant Box
-download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Ffedora-40&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Ffedora-40)](https://app.vagrantup.com/alvistack/boxes/fedora-40)
+download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Ffedora-41&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Ffedora-41)](https://app.vagrantup.com/alvistack/boxes/fedora-41)
 
 Fedora is a Linux distribution developed by the community-supported
 Fedora Project which is sponsored primarily by Red Hat, a subsidiary of
@@ -26,6 +26,9 @@ Learn more about Fedora: <https://getfedora.org/>
 - [`alvistack/fedora-rawhide`](https://app.vagrantup.com/alvistack/boxes/fedora-rawhide)
   - [`packer/fedora-rawhide-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-rawhide-libvirt/packer.json)
   - [`packer/fedora-rawhide-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-rawhide-virtualbox/packer.json)
+- [`alvistack/fedora-41`](https://app.vagrantup.com/alvistack/boxes/fedora-41)
+  - [`packer/fedora-41-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-41-libvirt/packer.json)
+  - [`packer/fedora-41-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-41-virtualbox/packer.json)
 - [`alvistack/fedora-40`](https://app.vagrantup.com/alvistack/boxes/fedora-40)
   - [`packer/fedora-40-libvirt/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-40-libvirt/packer.json)
   - [`packer/fedora-40-virtualbox/packer.json`](https://github.com/alvistack/vagrant-fedora/blob/master/packer/fedora-40-virtualbox/packer.json)
@@ -58,7 +61,7 @@ commands under your [project
 directory](https://learn.hashicorp.com/tutorials/vagrant/getting-started-project-setup?in=vagrant/getting-started):
 
     # Initialize Vagrant
-    vagrant init alvistack/fedora-40
+    vagrant init alvistack/fedora-41
 
     # Start the virtual machine
     vagrant up
@@ -76,8 +79,8 @@ You could also run our
 have [Vagrant](https://www.vagrantup.com/) and
 [Libvirt](https://libvirt.org/) installed, e.g.
 
-    # Run Molecule on Fedora 40
-    molecule converge -s fedora-40-libvirt
+    # Run Molecule on Fedora 41
+    molecule converge -s fedora-41-libvirt
 
 Please refer to [.gitlab-ci.yml](.gitlab-ci.yml) for more information on
 running Molecule.
