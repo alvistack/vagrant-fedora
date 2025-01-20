@@ -84,7 +84,6 @@
     {
       "inline": [
         "set -eu",
-        "sudo chmod u+rw /etc/*shadow* /etc/*passwd* /etc/*group*",
         "echo 'zchunk=False' | sudo tee -a /etc/dnf/dnf.conf",
         "sudo dnf makecache",
         "sudo dnf update -y",
