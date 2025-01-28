@@ -268,7 +268,7 @@ build:fedora-rawhide-virtualbox:
     _PROVIDER: virtualbox
     _ARCHITECTURE: amd64
   needs:
-    - deploy:fedora-rawhide-libvirt
+    - build:fedora-rawhide-libvirt
 
 test:fedora-rawhide-virtualbox:
   <<: *job-molecule-test
@@ -354,7 +354,7 @@ build:fedora-41-virtualbox:
     _PROVIDER: virtualbox
     _ARCHITECTURE: amd64
   needs:
-    - deploy:fedora-41-libvirt
+    - build:fedora-41-libvirt
 
 test:fedora-41-virtualbox:
   <<: *job-molecule-test
@@ -440,7 +440,7 @@ build:fedora-40-virtualbox:
     _PROVIDER: virtualbox
     _ARCHITECTURE: amd64
   needs:
-    - deploy:fedora-40-libvirt
+    - build:fedora-40-libvirt
 
 test:fedora-40-virtualbox:
   <<: *job-molecule-test
