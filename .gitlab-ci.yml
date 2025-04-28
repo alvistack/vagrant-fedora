@@ -301,6 +301,92 @@ deploy:fedora-rawhide-virtualbox:
   needs:
     - test:fedora-rawhide-virtualbox
 
+build:fedora-42-libvirt:
+  <<: *job-packer-build
+  stage: build
+  cache:
+    key: $CI_PIPELINE_ID-fedora-42-libvirt
+    paths:
+      - packer/*/output-vagrant
+  variables:
+    _BOX: fedora-42
+    _PROVIDER: libvirt
+    _ARCHITECTURE: amd64
+
+test:fedora-42-libvirt:
+  <<: *job-molecule-test
+  stage: test
+  cache:
+    key: $CI_PIPELINE_ID-fedora-42-libvirt
+    paths:
+      - packer/*/output-vagrant
+    policy: pull
+  variables:
+    _BOX: fedora-42
+    _PROVIDER: libvirt
+    _ARCHITECTURE: amd64
+  needs:
+    - build:fedora-42-libvirt
+
+deploy:fedora-42-libvirt:
+  <<: *job-vagrant-cloud-provider-upload
+  stage: deploy
+  cache:
+    key: $CI_PIPELINE_ID-fedora-42-libvirt
+    paths:
+      - packer/*/output-vagrant
+    policy: pull
+  variables:
+    _BOX: fedora-42
+    _PROVIDER: libvirt
+    _ARCHITECTURE: amd64
+  needs:
+    - test:fedora-42-libvirt
+
+build:fedora-42-virtualbox:
+  <<: *job-packer-build
+  stage: build
+  cache:
+    key: $CI_PIPELINE_ID-fedora-42-virtualbox
+    paths:
+      - packer/*/output-vagrant
+  variables:
+    _BOX: fedora-42
+    _PROVIDER: virtualbox
+    _ARCHITECTURE: amd64
+  needs:
+    - build:fedora-42-libvirt
+
+test:fedora-42-virtualbox:
+  <<: *job-molecule-test
+  stage: test
+  cache:
+    key: $CI_PIPELINE_ID-fedora-42-virtualbox
+    paths:
+      - packer/*/output-vagrant
+    policy: pull
+  variables:
+    _BOX: fedora-42
+    _PROVIDER: virtualbox
+    _ARCHITECTURE: amd64
+  needs:
+    - build:fedora-42-virtualbox
+
+deploy:fedora-42-virtualbox:
+  <<: *job-vagrant-cloud-provider-upload
+  stage: deploy
+  cache:
+    key: $CI_PIPELINE_ID-fedora-42-virtualbox
+    paths:
+      - packer/*/output-vagrant
+    policy: pull
+  variables:
+    _BOX: fedora-42
+    _PROVIDER: virtualbox
+    _ARCHITECTURE: amd64
+  needs:
+    - test:fedora-42-virtualbox
+
 build:fedora-41-libvirt:
   <<: *job-packer-build
   stage: build
