@@ -2,6 +2,7 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+- Remove Fedora 40 support
 - Support Fedora 42
 
 ## 20250423.1.2 - 2025-04-23
