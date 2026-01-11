@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
-  config.vm.hostname = "fedora-42"
-  config.vm.box = "alvistack/fedora-42"
+  config.vm.hostname = "fedora-43"
+  config.vm.box = "alvistack/fedora-43"
   config.vm.box_check_update = true
 
   config.vm.provider :virtualbox do |virtualbox, override|
